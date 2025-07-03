@@ -124,13 +124,5 @@ fetch("https://script.google.com/macros/s/AKfycbweSnMnJTjXBhB2YmMQ8wXdqo0Ow72uLE
 .catch(error => {
   alert("Đã xảy ra lỗi khi gửi dữ liệu. Vui lòng thử lại.\n" + error);
 });
-    .then(response => response.text())
-    .then(result => {
-      alert("Cảm ơn bạn đã đặt lịch. Chúng tôi sẽ liên hệ lại sớm!");
-      window.scrollTo(0, 0); // Cuộn lên đầu sau khi gửi
-    })
-    .catch(error => {
-      alert("Đã xảy ra lỗi khi gửi dữ liệu. Vui lòng thử lại.\n" + error);
-    });
   }
 </script>
