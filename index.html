@@ -109,7 +109,7 @@ formData.append("time", time);
 formData.append("service", Array.from(serviceSelected).map(s => s.value).join(", "));
 formData.append("note", note);
 
-fetch("https://script.google.com/macros/s/AKfycbwreyL6gd0dki2XXJ_RQa5rvZX33fGW_pA10Y3FwvADhFaovgTKd5No8Bc3AY6R651q2A/exec", {
+fetch("https://script.google.com/macros/s/AKfycbweSnMnJTjXBhB2YmMQ8wXdqo0Ow72uLEChPqWKTBl4bPc7oRayTYfMHyqKaz8weLlULw/exec", {
   method: "POST",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded"
