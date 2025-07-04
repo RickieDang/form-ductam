@@ -1,30 +1,39 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).send("Method Not Allowed");
-  }
+  if (req.method === 'POST') {
+    const {
+      source,
+      name,
+      phone,
+      date,
+      time,
+      service,
+      note
+    } = req.body;
 
-  const data = req.body;
+    const formData = new URLSearchParams();
+    formData.append("source", source);
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("service", service);
+    formData.append("note", note);
 
-  const formData = new URLSearchParams();
-  formData.append("name", data.name);
-  formData.append("phone", data.phone);
-  formData.append("date", data.date);
-  formData.append("time", data.time);
-  formData.append("service", data.service);
-  formData.append("note", data.note);
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbweSnMnJTjXBhB2YmMQ8wXdqo0Ow72uLEChPqWKTBl4bPc7oRayTYfMHyqKaz8weLlULw/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: formData.toString()
+      });
 
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbweSnMnJTjXBhB2YmMQ8wXdqo0Ow72uLEChPqWKTBl4bPc7oRayTYfMHyqKaz8weLlULw/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: formData.toString()
-    });
-
-    const text = await response.text();
-    return res.status(200).send(text);
-  } catch (error) {
-    return res.status(500).send("Lỗi proxy: " + error.message);
+      const text = await response.text();
+      return res.status(200).send(text);
+    } catch (error) {
+      return res.status(500).json({ error: "Gửi tới Google Apps Script thất bại", details: error.message });
+    }
+  } else {
+    res.status(405).json({ message: "Method Not Allowed" });
   }
 }
