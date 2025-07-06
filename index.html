@@ -129,8 +129,14 @@ fetch("/api/submit", {
   document.querySelector("#form-wrapper").style.display = "none";
   // Hiện màn hình cảm ơn
   document.getElementById("thank-you").style.display = "block";
-  // Cuộn lên đầu trang
-  window.scrollTo(0, 0);
+ 
+  // Gửi tín hiệu cho trang cha để scroll lên đầu (khi trong iframe)
+  if (window.parent !== window) {
+    window.parent.postMessage("scroll-to-top", "*");
+  } else {
+    // Nếu không phải iframe thì tự scroll
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 })
 .catch(error => {
   alert("Đã xảy ra lỗi khi gửi dữ liệu. Vui lòng thử lại.\n" + error);
