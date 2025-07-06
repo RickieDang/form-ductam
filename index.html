@@ -44,11 +44,17 @@
   <textarea id="note" name="note" required rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
   <div style="text-align: center;">
-  <button onclick="submitForm()" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
-    Gửi
+  <button id="submit-button" onclick="submitForm()" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
+      Gửi
   </button>
-
 </div>
+
+<!-- ✅ Loading spinner -->
+ <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
+    <div class="spinner"></div>
+    <div style="margin-top: 10px; color: #555; font-size: 16px;">Đang gửi dữ liệu...</div>
+  </div>
+
 </div> <!-- <- Đây là div bao toàn bộ form -->
 
 <!-- ✅ Màn hình cảm ơn -->
@@ -61,6 +67,21 @@
 <style>
   input, textarea, button {
     font-size: 16px;
+  }
+  
+  .spinner {
+    margin: auto;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #228B22;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
 </style>
 
@@ -96,15 +117,11 @@
       return;
     }
 
-    // ✅ Tạo dữ liệu để gửi
-    const data = {
-      name: name,
-      phone: phone,
-      date: date,
-      time: time,
-      service: Array.from(serviceSelected).map(s => s.value).join(", "),
-      note: note
-    };
+ // ✅ Show loading
+    document.getElementById("loading").style.display = "block";
+    const submitBtn = document.getElementById("submit-button");
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Đang gửi...";
 
     // ✅ Gửi dữ liệu bằng x-www-form-urlencoded (không bị lỗi CORS)
 const formData = new URLSearchParams();
@@ -130,6 +147,7 @@ fetch("/api/submit", {
 
   // Hiện màn hình cảm ơn
   document.getElementById("thank-you").style.display = "block";
+  document.getElementById("loading").style.display = "none";
   // Cuộn lên đầu trang
   window.scrollTo(0, 0);
  
@@ -143,6 +161,9 @@ fetch("/api/submit", {
 })
 .catch(error => {
   alert("Đã xảy ra lỗi khi gửi dữ liệu. Vui lòng thử lại.\n" + error);
-});
+      document.getElementById("loading").style.display = "none";
+      submitBtn.disabled = false;
+      submitBtn.innerText = "Gửi";
+    });
   }
 </script>
