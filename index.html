@@ -1,4 +1,4 @@
-<div style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; padding-top: 100px; padding-bottom: 0px; margin-bottom: 0px; overflow: auto; max-height: 100vh;">
+<div id="form-wrapper" style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; padding-top: 100px; padding-bottom: 0px; margin-bottom: 0px; overflow: auto; max-height: 100vh;">
   <h2 style="text-align: center; color: #228B22; font-weight: bold; font-size: 28px;">Đặt Lịch Trị Liệu</h2>
 
   <label><b>1. Bạn biết ĐỨC TÂM qua dịch vụ nào?</b></label><br>
@@ -52,8 +52,9 @@
 </div> <!-- <- Đây là div bao toàn bộ form -->
 
 <!-- ✅ Màn hình cảm ơn -->
-<div id="thank-you" style="display: none; max-width: 600px; margin: auto; padding: 100px 20px; text-align: center; font-size: 20px; color: green;">
-  ✅ Cảm ơn bạn đã đặt lịch.<br>Chúng tôi sẽ liên hệ lại sớm!
+<div id="thank-you" style="display: none; text-align: center; padding: 100px 20px;">
+  <h2 style="color: #228B22; font-size: 28px;">🎉 Cảm ơn bạn đã đặt lịch!</h2>
+  <p style="font-size: 18px;">Chúng tôi sẽ liên hệ lại trong thời gian sớm nhất.</p>
 </div>
 
 <!-- ✅ Tăng kích cỡ chữ nhập liệu cho mobile -->
@@ -125,7 +126,7 @@ fetch("/api/submit", {
 .then(response => response.text())
 .then(result => {
   // Ẩn form đặt lịch
-  document.querySelector("form").style.display = "none";
+  document.querySelector("#form-wrapper").style.display = "none";
   // Hiện màn hình cảm ơn
   document.getElementById("thank-you").style.display = "block";
   // Cuộn lên đầu trang
