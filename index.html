@@ -43,16 +43,16 @@
   <label for="note"><b>8. Ghi chú về bệnh của quý khách (nếu có):</b></label><br>
   <textarea id="note" name="note" rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
-<div style="text-align: center;">
+ <!-- ✅ Hiển thị lỗi nếu có -->
+<div id="error-message" style="display: none; color: red; text-align: center; margin-top: 10px;"></div>
+
+  <div style="text-align: center;">
   <button id="submit-button" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
       Gửi
   </button>
 </div>
 
-  <!-- ✅ Hiển thị lỗi nếu có -->
-<div id="error-message" style="display: none; color: red; text-align: center; margin-top: 10px;"></div>
-
-<!-- ✅ Loading spinner -->
+ <!-- ✅ Loading spinner -->
  <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
     <div class="spinner"></div>
     <div style="margin-top: 10px; color: #555; font-size: 16px;">Đang gửi dữ liệu...</div>
