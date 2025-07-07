@@ -41,7 +41,7 @@
   </div>
 
   <label for="note"><b>8. Ghi chú về bệnh của quý khách (nếu có):</b></label><br>
-  <textarea id="note" name="note" required rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
+  <textarea id="note" name="note" rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
   <div style="text-align: center;">
   <button id="submit-button" onclick="submitForm()" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
@@ -116,7 +116,7 @@
       return;
     }
 
-    if (!name || !phone || !date || !time || !note) {
+    if (!name || !phone || !date || !time) {
       alert("Vui lòng điền đầy đủ tất cả thông tin bắt buộc.");
       return;
     }
