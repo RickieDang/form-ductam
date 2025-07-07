@@ -156,6 +156,9 @@ fetch("/api/submit", {
 })
 .then(response => response.text())
 .then(result => {
+  // Ẩn thông báo lỗi nếu trước đó có
+  document.getElementById("error-message").style.display = "none";
+  
   // Ẩn form đặt lịch
   document.querySelector("#form-wrapper").style.display = "none";
 
