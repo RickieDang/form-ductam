@@ -99,19 +99,22 @@
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset() + timezoneOffset);
   document.getElementById("date").min = today.toISOString().split("T")[0];
 
-    // Đảm bảo gán sự kiện sau khi DOM sẵn sàng
-  document.addEventListener("DOMContentLoaded", function () {
+    // ✅ Khi DOM đã load xong, gán sự kiện
+ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("submit-button").addEventListener("click", submitForm);
   });
 
   // ✅ Hàm hiển thị lỗi bằng khung (thay vì popup alert)
-  function showError(message) {
+ function showError(message) {
     const errorDiv = document.getElementById("error-message");
     errorDiv.innerText = message;
     errorDiv.style.display = "block";
+  }
 
+  // ✅ Hàm xử lý submit
   function submitForm(event) {
     event.preventDefault(); // ✅ Ngăn reload hoặc lỗi submit mặc định trong iframe
+    
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const date = document.getElementById("date").value;
@@ -129,7 +132,7 @@
     if (!time) return showError("Vui lòng chọn thời gian.");
     if (serviceSelected.length === 0) return showError("Vui lòng chọn ít nhất một dịch vụ trị liệu.");
 
- // ✅ Show loading
+     // ✅ Show loading
     document.getElementById("loading").style.display = "block";
     const submitBtn = document.getElementById("submit-button");
     submitBtn.disabled = true;
