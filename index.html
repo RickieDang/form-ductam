@@ -44,7 +44,7 @@
   <textarea id="note" name="note" rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
   <div style="text-align: center;">
-  <button id="submit-button" onclick="submitForm()" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
+  <button id="submit-button" onclick="submitForm(event)" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
       Gửi
   </button>
 </div>
@@ -96,7 +96,8 @@
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset() + timezoneOffset);
   document.getElementById("date").min = today.toISOString().split("T")[0];
 
-  function submitForm() {
+  function submitForm(event) {
+    event.preventDefault(); // ✅ Ngăn reload hoặc lỗi submit mặc định trong iframe
     const name = document.getElementById("name").value.trim();
     const phone = document.getElementById("phone").value.trim();
     const date = document.getElementById("date").value;
