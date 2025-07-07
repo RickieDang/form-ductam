@@ -108,6 +108,11 @@
     const errorDiv = document.getElementById("error-message");
     errorDiv.innerText = message;
     errorDiv.style.display = "block";
+   
+   // Ẩn sau 3 giây (3000ms)
+    setTimeout(() => {
+      errorDiv.style.display = "none";
+    }, 2000);
   }
 
   // ✅ Hàm xử lý submit
