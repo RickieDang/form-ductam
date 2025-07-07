@@ -49,6 +49,9 @@
   </button>
 </div>
 
+  <!-- ✅ Hiển thị lỗi nếu có -->
+<div id="error-message" style="display: none; color: red; text-align: center; margin-top: 10px;"></div>
+
 <!-- ✅ Loading spinner -->
  <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
     <div class="spinner"></div>
@@ -96,6 +99,12 @@
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset() + timezoneOffset);
   document.getElementById("date").min = today.toISOString().split("T")[0];
 
+  // ✅ Hàm hiển thị lỗi bằng khung (thay vì popup alert)
+  function showError(message) {
+    const errorDiv = document.getElementById("error-message");
+    errorDiv.innerText = message;
+    errorDiv.style.display = "block";
+
   function submitForm(event) {
     event.preventDefault(); // ✅ Ngăn reload hoặc lỗi submit mặc định trong iframe
     const name = document.getElementById("name").value.trim();
@@ -107,28 +116,29 @@
     const sourceSelected = document.querySelector('input[name="source"]:checked');
     const serviceSelected = document.querySelectorAll('input[name="service"]:checked');
 
+   // ✅ Thay vì alert, dùng showError
     if (!sourceSelected) {
-      alert("Vui lòng chọn bạn biết đến ĐỨC TÂM qua dịch vụ nào.");
+      showError("Vui lòng chọn bạn biết đến ĐỨC TÂM qua dịch vụ nào.");
       return;
     }
     if (!name) {
-      alert("Vui lòng nhập họ tên.");
+      showError("Vui lòng nhập họ tên.");
       return;
     }
     if (!phone.match(/^[0-9]{10,11}$/)) {
-      alert("Vui lòng nhập số điện thoại hợp lệ (10-11 số).");
+      showError("Vui lòng nhập số điện thoại hợp lệ (10-11 số).");
       return;
     }
     if (!date) {
-      alert("Vui lòng chọn ngày đặt lịch.");
+      showError("Vui lòng chọn ngày đặt lịch.");
       return;
     }
     if (!time) {
-      alert("Vui lòng chọn thời gian.");
+      showError("Vui lòng chọn thời gian.");
       return;
     }
     if (serviceSelected.length === 0) {
-      alert("Vui lòng chọn ít nhất một dịch vụ trị liệu.");
+      showError("Vui lòng chọn ít nhất một dịch vụ trị liệu.");
       return;
     }
 
