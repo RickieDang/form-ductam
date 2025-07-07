@@ -1,4 +1,4 @@
-<div id="form-wrapper" style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; padding-top: 100px; padding-bottom: 0px; margin-bottom: 0px; overflow: auto; max-height: 100vh;">
+<div id="form-wrapper" style="max-width: 600px; margin: auto; font-family: Arial, sans-serif; padding: 20px 16px 40px; box-sizing: border-box;">
   <h2 style="text-align: center; color: #228B22; font-weight: bold; font-size: 28px;">Đặt Lịch Trị Liệu</h2>
 
   <label><b>1. Bạn biết ĐỨC TÂM qua dịch vụ nào?</b></label><br>
@@ -43,14 +43,13 @@
   <label for="note"><b>8. Ghi chú về bệnh của quý khách (nếu có):</b></label><br>
   <textarea id="note" name="note" rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
- <!-- ✅ Hiển thị lỗi nếu có -->
-<div id="error-message" style="display: none; color: red; margin-bottom: 16px; font-weight: bold; text-align: center;"></div>
-
-  <div style="text-align: center;">
-  <button id="submit-button" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
+<!-- ✅ Sticky nút gửi và lỗi -->
+  <div style="position: sticky; bottom: 0; background: white; padding-top: 12px; padding-bottom: 20px; text-align: center; z-index: 10;">
+    <div id="error-message" style="display: none; color: red; font-weight: bold; margin-bottom: 10px;"></div>
+    <button id="submit-button" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
       Gửi
-  </button>
-</div>
+    </button>
+  </div>
 
  <!-- ✅ Loading spinner -->
  <div id="loading" style="display: none; text-align: center; margin-top: 20px;">
