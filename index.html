@@ -43,8 +43,8 @@
   <label for="note"><b>8. Ghi chú về bệnh của quý khách (nếu có):</b></label><br>
   <textarea id="note" name="note" rows="4" style="width: 100%; padding: 8px;"></textarea><br><br>
 
-  <div style="text-align: center;">
-  <button id="submit-button" onclick="submitForm(event)" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
+<div style="text-align: center;">
+  <button id="submit-button" style="padding: 16px 30px; font-size: 20px; font-weight: bold; background-color: green; color: white; border: none; border-radius: 8px; cursor: pointer;">
       Gửi
   </button>
 </div>
@@ -99,6 +99,11 @@
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset() + timezoneOffset);
   document.getElementById("date").min = today.toISOString().split("T")[0];
 
+    // Đảm bảo gán sự kiện sau khi DOM sẵn sàng
+  document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("submit-button").addEventListener("click", submitForm);
+  });
+
   // ✅ Hàm hiển thị lỗi bằng khung (thay vì popup alert)
   function showError(message) {
     const errorDiv = document.getElementById("error-message");
@@ -117,30 +122,12 @@
     const serviceSelected = document.querySelectorAll('input[name="service"]:checked');
 
    // ✅ Thay vì alert, dùng showError
-    if (!sourceSelected) {
-      showError("Vui lòng chọn bạn biết đến ĐỨC TÂM qua dịch vụ nào.");
-      return;
-    }
-    if (!name) {
-      showError("Vui lòng nhập họ tên.");
-      return;
-    }
-    if (!phone.match(/^[0-9]{10,11}$/)) {
-      showError("Vui lòng nhập số điện thoại hợp lệ (10-11 số).");
-      return;
-    }
-    if (!date) {
-      showError("Vui lòng chọn ngày đặt lịch.");
-      return;
-    }
-    if (!time) {
-      showError("Vui lòng chọn thời gian.");
-      return;
-    }
-    if (serviceSelected.length === 0) {
-      showError("Vui lòng chọn ít nhất một dịch vụ trị liệu.");
-      return;
-    }
+   if (!sourceSelected) return showError("Vui lòng chọn bạn biết đến ĐỨC TÂM qua dịch vụ nào.");
+    if (!name) return showError("Vui lòng nhập họ tên.");
+    if (!phone.match(/^[0-9]{10,11}$/)) return showError("Vui lòng nhập số điện thoại hợp lệ (10-11 số).");
+    if (!date) return showError("Vui lòng chọn ngày đặt lịch.");
+    if (!time) return showError("Vui lòng chọn thời gian.");
+    if (serviceSelected.length === 0) return showError("Vui lòng chọn ít nhất một dịch vụ trị liệu.");
 
  // ✅ Show loading
     document.getElementById("loading").style.display = "block";
