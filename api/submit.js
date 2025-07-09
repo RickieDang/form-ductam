@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     formData.append("note", note);
 
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbzPAavyCaoCPeE9IBnH2EI_GaSfLcY56WVkiF6T1qBb4J7CB2Ig1k4KrBi4TNtjeP_Zxw/exec", {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbxfXUWz87yrJEEa3oKjt_q1jkmpp1spAkT1t-OsiYE4RXYEgcXUktgOuw8j6ulGh_mxxg/exec", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
